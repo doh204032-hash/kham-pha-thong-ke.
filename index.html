@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khám Phá Thống Kê — Tổ 1 | Toán Học Lớp 10</title>
+
+  <!-- KaTeX CSS (CDN jsDelivr) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+
+  <style>
+    /* =========================================================
+       BIẾN MÀU SẮC ONE UI 9.0 + RGB GEMINI (LIGHT & DARK MODE)
+       ========================================================= */
+    :root {
+      --bg: #f2f4f8;
+      --surface: #ffffff;
+      --surface-alt: #f6f8fc;
+      --glass: rgba(255, 255, 255, 0.78);
+      --text: #111827;
+      --text-muted: #526071;
+      --border: rgba(15, 23, 42, 0.08);
+      --shadow-card: 0 8px 28px rgba(15, 23, 42, 0.06);
+      --shadow-float: 0 10px 24px rgba(66, 133, 244, 0.22);
+
+      /* Bảng màu RGB Gemini */
+      --rgb-1: #4285f4;
+      --rgb-2: #8b5cf6;
+      --rgb-3: #ec4899;
+      --rgb-4: #06b6d4;
+      --rgb-grad: linear-gradient(120deg, var(--rgb-1), var(--rgb-2), var(--rgb-3), var(--rgb-4), var(--rgb-1));
+
+      --primary: #4285f4;
+      --primary-soft: rgba(66, 133, 244, 0.12);
+      --success: #16a34a;
+      --success-soft: rgba(22, 163, 74, 0.12);
+      --danger: #ef4444;
+      --danger-soft: rgba(239, 68, 68, 0.12);
+      --warning: #d97706;
+      --warning-soft: rgba(245, 158, 11, 0.14);
+
+      --radius-card: 26px;
+      --radius-inner: 18px;
+      --radius-pill: 999px;
+      --ease-oneui: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #000000;
+      --surface: #16161b;
+      --surface-alt: #202028;
+      --glass: rgba(22, 22, 27, 0.8);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border: rgba(255, 255, 255, 0.09);
+      --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.55);
+      --shadow-float: 0 10px 26px rgba(139, 92, 246, 0.32);
+
+      --primary: #60a5fa;
+      --primary-soft: rgba(96, 165, 250, 0.16);
+      --success: #4ade80;
+      --success-soft: rgba(74, 222, 128, 0.15);
+      --danger: #f87171;
+      --danger-soft: rgba(248, 113, 113, 0.16);
+      --warning: #fbbf24;
+      --warning-soft: rgba(251, 191, 36, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 48px;
+      transition: background-color 0.35s var(--ease-oneui), color 0.35s var(--ease-oneui);
+      overflow-x: hidden;
+    }
+
+    /* =========================================================
+       ANIMATION KEYFRAMES
+       ========================================================= */
+    @keyframes rgbFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes oneuiEnter {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.75; }
+      50% { opacity: 1; }
+    }
+
+    /* =========================================================
+       ONE UI 9.0 HEADER & THEME TOGGLE
+       ========================================================= */
+    header {
+      position: relative;
+      padding: 26px 18px 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .header-top-row {
+      max-width: 960px;
+      margin: 0 auto 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .org-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text);
+      box-shadow: var(--shadow-card);
+    }
+
+    .org-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--rgb-grad);
+      background-size: 300% 300%;
+      animation: rgbFlow 4s ease infinite;
+    }
+
+    .theme-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.2s var(--ease-oneui), background-color 0.25s ease;
+    }
+
+    .theme-btn:active {
+      transform: scale(0.93);
+    }
+
+    .brand-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      background: var(--rgb-grad);
+      background-size: 260% 260%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: rgbFlow 7s ease infinite;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* =========================================================
+       FLOATING GLASS NAVIGATION BAR (ONE UI PILL TABS)
+       ========================================================= */
+    .nav-wrapper {
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      max-width: 960px;
+      margin: 0 auto 14px;
+      padding: 0 12px;
+    }
+
+    .nav-bar {
+      background: var(--glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      display: flex;
+      overflow-x: auto;
+      gap: 6px;
+      padding: 6px;
+      box-shadow: var(--shadow-card);
+      scrollbar-width: none;
+    }
+
+    .nav-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-btn {
+      flex: 0 0 auto;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 9px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.25s var(--ease-oneui);
+    }
+
+    .nav-btn:active {
+      transform: scale(0.94);
+    }
+
+    .nav-btn.active {
+      background: var(--rgb-grad);
+      background-size: 250% 250%;
+      animation: rgbFlow 6s ease infinite;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(66, 133, 244, 0.35);
+    }
+
+    /* =========================================================
+       MAIN CONTAINER & SECTIONS
+       ========================================================= */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 4px 14px 20px;
+    }
+
+    .tab-section {
+      display: none;
+    }
+
+    .tab-section.active {
+      display: block;
+      animation: oneuiEnter 0.4s var(--ease-oneui);
+    }
+
+    /* =========================================================
+       ONE UI 9.0 CARDS & RGB ACCENT BORDER
+       ========================================================= */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 20px 18px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-card);
+      transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.25s var(--ease-oneui);
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* Hero Card với viền RGB phát sáng mượt */
+    .hero-rgb-wrap {
+      position: relative;
+      padding: 2px;
+      border-radius: calc(var(--radius-card) + 2px);
+      background: var(--rgb-grad);
+      background-size: 280% 280%;
+      animation: rgbFlow 8s ease infinite;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-float);
+    }
+
+    .hero-banner {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: 26px 18px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 12px;
+    }
+
+    .hero-banner h2 {
+      font-size: 1.38rem;
+      font-weight: 800;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    /* =========================================================
+       BUTTONS (ONE UI SQUIRCLE & PILL)
+       ========================================================= */
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 18px;
+      border-radius: var(--radius-pill);
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s var(--ease-oneui), box-shadow 0.25s ease, opacity 0.2s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    .btn-primary {
+      background: var(--rgb-grad);
+      background-size: 240% 240%;
+      animation: rgbFlow 6s ease infinite;
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(66, 133, 244, 0.3);
+    }
+
+    .btn-accent {
+      background: var(--surface-alt);
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline {
+      background: var(--surface-alt);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-danger-outline {
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid transparent;
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    /* =========================================================
+       FEATURE & FORMULA GRIDS
+       ========================================================= */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .feature-item {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-inner);
+      padding: 16px;
+      transition: transform 0.25s var(--ease-oneui), border-color 0.25s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--rgb-1);
+    }
+
+    .feature-item strong {
+      display: block;
+      font-size: 0.96rem;
+      margin-bottom: 4px;
+      color: var(--primary);
+    }
+
+    .formula-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .formula-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-inner);
+      padding: 15px 14px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s var(--ease-oneui), border-color 0.25s ease;
+    }
+
+    .formula-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 14px;
+      bottom: 14px;
+      width: 4px;
+      border-radius: 0 4px 4px 0;
+      background: var(--rgb-grad);
+      background-size: 200% 200%;
+      animation: rgbFlow 6s ease infinite;
+    }
+
+    .formula-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--rgb-2);
+    }
+
+    .formula-card .f-title {
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+      font-size: 0.94rem;
+      padding-left: 6px;
+    }
+
+    .formula-card .f-math {
+      margin: 6px 0;
+      padding-left: 6px;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .formula-card .subtitle {
+      padding-left: 6px;
+      margin-bottom: 0;
+      font-size: 0.85rem;
+    }
+
+    /* KaTeX Mobile Fit Fix */
+    .katex-display {
+      font-size: 0.88em;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 3px 0;
+      margin: 0.4em 0;
+    }
+
+    /* Casio Guide Panel */
+    .casio-panel {
+      display: none;
+      margin-top: 14px;
+      background: #111827;
+      color: #f3f4f6;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-inner);
+      padding: 16px;
+      font-size: 0.88rem;
+      animation: oneuiEnter 0.3s var(--ease-oneui);
+    }
+
+    .casio-panel.open {
+      display: block;
+    }
+
+    .casio-key {
+      display: inline-block;
+      background: #1f2937;
+      border: 1px solid #4b5563;
+      color: #38bdf8;
+      font-family: monospace;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 7px;
+      margin: 0 2px;
+    }
+
+    .casio-panel ol {
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+
+    .casio-panel li {
+      margin-bottom: 6px;
+    }
+
+    /* =========================================================
+       SANDBOX INPUTS & RESULTS
+       ========================================================= */
+    label.field-label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    textarea, input[type="text"], select {
+      width: 100%;
+      padding: 13px 15px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-inner);
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: var(--surface-alt);
+      color: var(--text);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.25s ease;
+    }
+
+    textarea:focus, input[type="text"]:focus, select:focus {
+      outline: none;
+      border-color: var(--rgb-1);
+      box-shadow: 0 0 0 4px var(--primary-soft);
+    }
+
+    .alert-error {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 15px;
+      border-radius: var(--radius-inner);
+      background: var(--danger-soft);
+      color: var(--danger);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .results-wrapper {
+      display: none;
+      margin-top: 16px;
+      animation: oneuiEnter 0.4s var(--ease-oneui);
+    }
+
+    .sorted-box {
+      background: var(--primary-soft);
+      border-radius: var(--radius-inner);
+      padding: 12px 14px;
+      font-size: 0.88rem;
+      word-break: break-word;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .stat-box {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-inner);
+      padding: 12px;
+      transition: transform 0.22s var(--ease-oneui), border-color 0.22s ease;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-2px);
+      border-color: var(--rgb-4);
+    }
+
+    /* Fix dấu ngoặc bị rớt dòng trên màn hình dọc */
+    .stat-label {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .stat-value {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 3px;
+      word-break: break-word;
+    }
+
+    .outlier-box {
+      padding: 13px 15px;
+      border-radius: var(--radius-inner);
+      background: var(--warning-soft);
+      color: var(--warning);
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .outlier-box.clean {
+      background: var(--success-soft);
+      color: var(--success);
+    }
+
+    .steps-box {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-inner);
+      padding: 14px;
+      font-size: 0.88rem;
+      overflow-x: auto;
+      margin-bottom: 16px;
+    }
+
+    .steps-box p {
+      margin-bottom: 8px;
+    }
+
+    .chart-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .chart-controls select {
+      width: auto;
+      min-width: 200px;
+      padding: 9px 14px;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-inner);
+      padding: 12px;
+    }
+
+    .chart-fallback {
+      display: none;
+      text-align: center;
+      padding: 40px 16px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* =========================================================
+       SURVEY TABLE (TỐI ƯU KHÔNG CẮT CỘT 4.5 TRÊN MOBILE)
+       ========================================================= */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 12px 0;
+      border-radius: var(--radius-inner);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 8px 4px;
+      text-align: center;
+    }
+
+    th {
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       QUIZ SECTION
+       ========================================================= */
+    .quiz-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--primary-soft);
+      padding: 11px 16px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 14px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      color: var(--primary);
+    }
+
+    .quiz-question {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      overflow-x: auto;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .quiz-opt-btn {
+      text-align: left;
+      padding: 13px 16px;
+      border-radius: var(--radius-inner);
+      border: 1.5px solid var(--border);
+      background: var(--surface-alt);
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.16s var(--ease-oneui), border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .quiz-opt-btn:hover:not(:disabled) {
+      border-color: var(--rgb-1);
+      background: var(--primary-soft);
+    }
+
+    .quiz-opt-btn:active:not(:disabled) {
+      transform: scale(0.97);
+    }
+
+    .quiz-opt-btn.correct {
+      background: var(--success-soft);
+      border-color: var(--success);
+      color: var(--success);
+      font-weight: 800;
+    }
+
+    .quiz-opt-btn.wrong {
+      background: var(--danger-soft);
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    .quiz-explanation {
+      display: none;
+      margin-top: 14px;
+      padding: 13px 15px;
+      border-radius: var(--radius-inner);
+      background: var(--surface-alt);
+      border-left: 4px solid var(--rgb-4);
+      font-size: 0.88rem;
+      animation: oneuiEnter 0.28s var(--ease-oneui);
+    }
+
+    .quiz-result {
+      display: none;
+      text-align: center;
+      padding: 22px 16px;
+      background: var(--surface-alt);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-card);
+      margin-top: 14px;
+      animation: oneuiEnter 0.35s var(--ease-oneui);
+    }
+
+    .badge-rank {
+      display: inline-block;
+      margin: 10px 0;
+      padding: 7px 16px;
+      border-radius: var(--radius-pill);
+      background: var(--rgb-grad);
+      background-size: 240% 240%;
+      animation: rgbFlow 5s ease infinite;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.88rem;
+    }
+    /* =========================================================
+       RGB EDGE LIGHTING (VIỀN VUÔNG, KHÔNG NỐI ĐUÔI, ĐUÔI MỜ DẦN)
+       ========================================================= */
+    #rgb-edge-sweep {
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0;
+      animation: edgeSweepCycle 7.5s linear infinite;
+    }
+
+    /* Vệt chạy chạy dọc mép trên & cạnh phải/dưới/trái bằng SVG chuẩn theo chu vi */
+    #rgb-edge-sweep svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .edge-meteor-tail {
+      fill: none;
+      stroke: url(#rgbMeteorGrad);
+      stroke-width: 3px;
+      stroke-linecap: butt;
+      stroke-linejoin: miter;
+      /* Độ dài nét ~75% chu vi màn hình, phần còn lại để trống (không nối đuôi) */
+      stroke-dasharray: 2100 900;
+      stroke-dashoffset: 3000;
+      opacity: 0.58;
+      filter: blur(0.6px);
+      animation: meteorPerimeterRun 7.5s cubic-bezier(0.35, 0.08, 0.25, 0.95) infinite;
+    }
+
+    .edge-meteor-head {
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 3.5px;
+      stroke-linecap: butt;
+      stroke-linejoin: miter;
+      /* Đầu vệt sáng nhẹ như sao băng lướt qua */
+      stroke-dasharray: 42 2958;
+      stroke-dashoffset: 3000;
+      opacity: 0.72;
+      filter: blur(1.6px);
+      animation: meteorPerimeterRun 7.5s cubic-bezier(0.35, 0.08, 0.25, 0.95) infinite;
+    }
+
+    @keyframes meteorPerimeterRun {
+      0% {
+        stroke-dashoffset: 3000;
+      }
+      78% {
+        stroke-dashoffset: 0;
+      }
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    /* Chạy 1 vòng rồi nghỉ nhẹ trước khi lướt vòng tiếp theo, không nối đuôi */
+    @keyframes edgeSweepCycle {
+      0% {
+        opacity: 0;
+      }
+      6% {
+        opacity: 1;
+      }
+      74% {
+        opacity: 0.9;
+      }
+      82% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* Desktop Breakpoints */
+    @media (min-width: 680px) {
+      .nav-bar {
+        justify-content: center;
+      }
+      .feature-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .formula-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .quiz-options {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .chart-container {
+        height: 360px;
+      }
+      table {
+        font-size: 0.9rem;
+      }
+      th, td {
+        padding: 10px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="rgb-edge-sweep" aria-hidden="true">
+    <svg viewBox="0 0 1000 2000" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="rgbMeteorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.05" />
+          <stop offset="35%" stop-color="#8b5cf6" stop-opacity="0.32" />
+          <stop offset="72%" stop-color="#ec4899" stop-opacity="0.62" />
+          <stop offset="100%" stop-color="#60a5fa" stop-opacity="0.92" />
+        </linearGradient>
+      </defs>
+      <!-- Hình chữ nhật viền vuông 0px bo góc -->
+      <rect class="edge-meteor-tail" x="1.5" y="1.5" width="997" height="1997" rx="0" ry="0" />
+      <rect class="edge-meteor-head" x="1.5" y="1.5" width="997" height="1997" rx="0" ry="0" />
+    </svg>
+  </div>
+
+  <header>
+    <div class="header-top-row">
+      <div class="org-pill">
+        <span class="org-dot"></span>
+        <span>Tổ 1 • Toán 10</span>
+      </div>
+      <button id="btn-theme-toggle" class="theme-btn" type="button" aria-label="Chuyển chế độ Sáng Tối">
+        🌙 Chế độ tối
+      </button>
+    </div>
+    <h1 class="brand-title">KHÁM PHÁ THỐNG KÊ</h1>
+    <p>Web App Học Tập &amp; Phân Tích Dữ Liệu — Dự Án Tổ 1</p>
+  </header>
+
+  <div class="nav-wrapper">
+    <nav class="nav-bar" aria-label="Điều hướng chính">
+      <button id="nav-tab-home" class="nav-btn active" type="button">Trang chủ</button>
+      <button id="nav-tab-theory" class="nav-btn" type="button">Góc lý thuyết</button>
+      <button id="nav-tab-sandbox" class="nav-btn" type="button">Phòng thí nghiệm</button>
+      <button id="nav-tab-survey" class="nav-btn" type="button">Ứng dụng thực tế</button>
+      <button id="nav-tab-quiz" class="nav-btn" type="button">Góc thử thách</button>
+    </nav>
+  </div>
+
+  <main>
+    <!-- ==================== 1. TRANG CHỦ ==================== -->
+    <section id="section-home" class="tab-section active">
+      <div class="hero-rgb-wrap">
+        <div class="hero-banner">
+          <span class="hero-badge">DỰ ÁN TOÁN HỌC LỚP 10 • TỔ 1</span>
+          <h2>Biến những con số khô khan thành câu chuyện biết nói</h2>
+          <p class="subtitle">
+            Tra cứu công thức chuẩn SGK Toán 10, tính toán tự động 11 đặc trưng mẫu số liệu, vẽ biểu đồ tần số trực quan và thử sức với bộ câu hỏi tự sinh không giới hạn.
+          </p>
+          <div class="btn-group" style="justify-content: center;">
+            <button id="btn-start-sandbox" class="btn btn-primary" type="button">Mở Phòng Thí Nghiệm</button>
+            <button id="btn-start-quiz" class="btn btn-accent" type="button">Thử Thách Trắc Nghiệm</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Giới thiệu nhóm thực hiện</h2>
+        <p class="subtitle">
+          <strong>Nhóm thực hiện:</strong> Tổ 1 — Lớp 10C3.<br />
+          <strong>Mục tiêu dự án:</strong> Vận dụng thành thạo chương Thống kê (Số trung bình, Trung vị, Tứ phân vị, Mốt, Phương sai, Độ lệch chuẩn và Biểu đồ) vào phân tích dữ liệu thực tiễn.
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <strong>11 Chỉ Số Chuẩn SGK</strong>
+            Tính chính xác theo quy ước Toán 10 Việt Nam và cảnh báo giá trị ngoại lệ tức thì.
+          </div>
+          <div class="feature-item">
+            <strong>Hướng Dẫn Casio 580VN X</strong>
+            Tóm tắt từng phím bấm giúp kiểm tra nhanh kết quả khi làm bài tập trên lớp.
+          </div>
+          <div class="feature-item">
+            <strong>Đề Thi Tự Sinh Mới</strong>
+            Mỗi lượt làm trắc nghiệm đều tạo số liệu mới, chống học vẹt và có lời giải chi tiết.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 2. GÓC LÝ THUYẾT ==================== -->
+    <section id="section-theory" class="tab-section">
+      <div class="card">
+        <h2>Các số đặc trưng của mẫu số liệu không ghép nhóm</h2>
+        <p class="subtitle">Giả sử mẫu số liệu gồm $n$ giá trị $x_1, x_2, \dots, x_n$ đã sắp xếp theo thứ tự không giảm.</p>
+
+        <div id="theory-formula-list" class="formula-grid">
+          <div class="formula-card">
+            <div class="f-title">1. Số trung bình cộng ($\bar{x}$)</div>
+            <div class="f-math">$$\bar{x} = \frac{x_1 + x_2 + \dots + x_n}{n}$$</div>
+            <p class="subtitle">Đại diện cho giá trị trung tâm của mẫu số liệu.</p>
+          </div>
+
+          <div class="formula-card">
+            <div class="f-title">2. Trung vị ($M_e$)</div>
+            <div class="f-math">$$M_e = \begin{cases} x_{\frac{n+1}{2}} & (n\text{ lẻ}) \\ \frac{1}{2}(x_{\frac{n}{2}} + x_{\frac{n}{2}+1}) & (n\text{ chẵn}) \end{cases}$$</div>
+            <p class="subtitle">Ít bị ảnh hưởng bởi các giá trị bất thường (ngoại lệ).</p>
+          </div>
+
+          <div class="formula-card">
+            <div class="f-title">3. Tứ phân vị ($Q_1, Q_2, Q_3$) &amp; $\Delta_Q$</div>
+            <div class="f-math">$$Q_2 = M_e, \quad \Delta_Q = Q_3 - Q_1$$</div>
+            <p class="subtitle">$Q_1$ là trung vị nửa trái; $Q_3$ là trung vị nửa phải (bỏ phần tử giữa nếu $n$ lẻ).</p>
+          </div>
+
+          <div class="formula-card">
+            <div class="f-title">4. Mốt ($M_o$) &amp; Khoảng biến thiên ($R$)</div>
+            <div class="f-math">$$R = x_{\max} - x_{\min}$$</div>
+            <p class="subtitle">$M_o$ là giá trị có tần số lớn nhất (có thể có 1, nhiều hoặc không có mốt).</p>
+          </div>
+
+          <div class="formula-card">
+            <div class="f-title">5. Phương sai ($s^2$) &amp; Độ lệch chuẩn ($s$)</div>
+            <div class="f-math">$$s^2 = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2, \quad s = \sqrt{s^2}$$</div>
+            <p class="subtitle">Đo mức độ phân tán của các số liệu quanh số trung bình.</p>
+          </div>
+
+          <div class="formula-card">
+            <div class="f-title">6. Giá trị ngoại lệ (Outlier)</div>
+            <div class="f-math">$$x < Q_1 - 1.5\Delta_Q \;\text{ hoặc }\; x > Q_3 + 1.5\Delta_Q$$</div>
+            <p class="subtitle">Phát hiện các giá trị quá lớn hoặc quá nhỏ so với mặt bằng chung.</p>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button id="btn-toggle-casio" class="btn btn-primary btn-full" type="button">Xem hướng dẫn bấm máy Casio fx-580VN X</button>
+        </div>
+
+        <div id="casio-guide-panel" class="casio-panel">
+          <strong>Các bước tính nhanh Thống kê 1 biến trên Casio fx-580VN X:</strong>
+          <ol>
+            <li>Vào chế độ Thống kê: bấm <span class="casio-key">MENU</span> → <span class="casio-key">6</span> (Thống kê) → <span class="casio-key">1</span> (1-Biến).</li>
+            <li>Nhập từng giá trị vào cột <strong>x</strong>, sau mỗi số bấm <span class="casio-key">=</span>.</li>
+            <li>Sau khi nhập xong toàn bộ dãy số, bấm <span class="casio-key">AC</span> để về màn hình tính.</li>
+            <li>Xem toàn bộ kết quả: bấm <span class="casio-key">OPTN</span> → <span class="casio-key">2</span> (Tính 1-Biến).</li>
+            <li>Đọc các ký hiệu trên màn hình Casio:
+              <strong>$\bar{x}$</strong> (Số trung bình),
+              <strong>$\sigma^2 x$</strong> (Phương sai mẫu chia $n$ theo SGK Toán 10),
+              <strong>$\sigma x$</strong> (Độ lệch chuẩn),
+              <strong>$Q_1, \text{Med}, Q_3$</strong> (Tứ phân vị &amp; Trung vị).
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. PHÒNG THÍ NGHIỆM DỮ LIỆU ==================== -->
+    <section id="section-sandbox" class="tab-section">
+      <div class="card">
+        <h2>Phòng Thí Nghiệm Dữ Liệu</h2>
+        <p class="subtitle">Nhập dãy số bất kỳ (cách nhau bằng dấu phẩy, chấm phẩy hoặc khoảng trắng). Dùng dấu chấm <code>.</code> cho số thập phân.</p>
+
+        <label class="field-label" for="input-data-series">Dãy số liệu đầu vào (từ 2 đến 500 số):</label>
+        <textarea id="input-data-series" rows="3" placeholder="Ví dụ: 7, 8, 6.5, 9, 8, 7.5, 10, 8, 2, 7.5"></textarea>
+
+        <div class="btn-group">
+          <button id="btn-calculate" class="btn btn-primary" type="button">Tính toán &amp; Vẽ biểu đồ</button>
+          <button id="btn-load-sample" class="btn btn-outline" type="button">Nạp dữ liệu mẫu</button>
+          <button id="btn-clear-data" class="btn btn-danger-outline" type="button">Xóa trắng</button>
+        </div>
+
+        <div id="sandbox-error-msg" class="alert-error" role="alert"></div>
+      </div>
+
+      <div id="sandbox-results-wrapper" class="results-wrapper">
+        <div class="card">
+          <h3>Kết quả phân tích thống kê</h3>
+          <div class="sorted-box">
+            <strong>Dãy số đã sắp xếp không giảm:</strong>
+            <div id="res-sorted-data" style="margin-top: 4px;"></div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-label">Cỡ mẫu ($n$)</div>
+              <div id="res-count" class="stat-value">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Số trung bình ($\bar{x}$)</div>
+              <div id="res-mean" class="stat-value">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Trung vị ($M_e$)</div>
+              <div id="res-median" class="stat-value">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Mốt ($M_o$)</div>
+              <div id="res-mode" class="stat-value">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Khoảng biến thiên ($R$)</div>
+              <div id="res-range" class="stat-value">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Tứ phân vị 1 ($Q_1$)</div>
+              <div id="res-q1" class="stat-value">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Tứ phân vị 2 ($Q_2$)</div>
+              <div id="res-q2" class="stat-value">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Tứ phân vị 3 ($Q_3$)</div>
+              <div id="res-q3" class="stat-value">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Khoảng tứ phân vị ($\Delta_Q$)</div>
+              <div id="res-iqr" class="stat-value">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Phương sai ($s^2$)</div>
+              <div id="res-variance" class="stat-value">-</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Độ lệch chuẩn ($s$)</div>
+              <div id="res-std" class="stat-value">-</div>
+            </div>
+          </div>
+
+          <div id="res-outliers" class="outlier-box"></div>
+
+          <h3>Các bước giải chi tiết</h3>
+          <div id="res-steps-math" class="steps-box"></div>
+
+          <div class="chart-controls">
+            <h3 style="margin-bottom: 0;">Biểu đồ tần số trực quan</h3>
+            <select id="select-chart-type" aria-label="Chọn loại biểu đồ">
+              <option value="bar">Biểu đồ cột tần số</option>
+              <option value="line">Biểu đồ đường tần số</option>
+            </select>
+          </div>
+
+          <div class="chart-container">
+            <canvas id="stats-chart-canvas"></canvas>
+            <div id="chart-fallback-msg" class="chart-fallback">
+              Không thể tải thư viện biểu đồ (Chart.js) do kết nối mạng yếu. Toàn bộ bảng số liệu thống kê ở trên vẫn hiển thị đầy đủ và chính xác.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 4. ỨNG DỤNG THỰC TẾ ==================== -->
+    <section id="section-survey" class="tab-section">
+      <div class="card">
+        <h2>Ứng Dụng Thực Tế: Khảo Sát Thời Gian Tự Học</h2>
+        <p class="subtitle">
+          <strong>Tổ 1</strong> đã khảo sát ngẫu nhiên <strong>30 học sinh lớp 10</strong> về thời gian tự học buổi tối tại nhà (đơn vị: giờ/ngày).
+        </p>
+
+        <div class="table-wrap">
+          <table id="survey-summary-table">
+            <thead>
+              <tr>
+                <th>Giờ học</th>
+                <th>1.0</th>
+                <th>1.5</th>
+                <th>2.0</th>
+                <th>2.5</th>
+                <th>3.0</th>
+                <th>3.5</th>
+                <th>4.5</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Số HS</strong></td>
+                <td>2</td>
+                <td>5</td>
+                <td>9</td>
+                <td>6</td>
+                <td>5</td>
+                <td>2</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="subtitle">
+          <strong>Nhận xét nhanh:</strong> Đa số học sinh tự học từ 1.5 đến 3.0 giờ mỗi tối. Tuy nhiên có 1 bạn học tới 4.5 giờ — hãy bấm nút bên dưới để kiểm tra xem giá trị 4.5 có phải là <em>giá trị ngoại lệ</em> hay không và xem biểu đồ phân bố ngay lập tức!
+        </p>
+
+        <button id="btn-push-survey-to-sandbox" class="btn btn-primary btn-full" type="button">
+          Đưa dữ liệu khảo sát vào Phòng thí nghiệm
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== 5. GÓC THỬ THÁCH (QUIZ) ==================== -->
+    <section id="section-quiz" class="tab-section">
+      <div class="card">
+        <h2>Góc Thử Thách: Trắc Nghiệm Thống Kê</h2>
+        <p class="subtitle">Gồm 6 câu hỏi (3 câu lý thuyết + 3 câu tính toán tự sinh số liệu mới mỗi lượt). Thời gian: 3 phút.</p>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+          <input id="input-player-name" type="text" placeholder="Nhập tên của bạn (VD: Minh Quân)..." style="flex: 1 1 200px;" />
+          <button id="btn-quiz-start" class="btn btn-primary" type="button">Bắt đầu / Đề mới</button>
+        </div>
+
+        <div id="quiz-play-area" style="display: none;">
+          <div class="quiz-top-bar">
+            <span id="quiz-progress">Câu 1 / 6</span>
+            <span id="quiz-timer">03:00</span>
+          </div>
+
+          <div id="quiz-question-box" class="quiz-question"></div>
+          <div id="quiz-options-container" class="quiz-options"></div>
+          <div id="quiz-explanation-box" class="quiz-explanation"></div>
+
+          <div class="btn-group" style="justify-content: flex-end;">
+            <button id="btn-quiz-next" class="btn btn-primary" type="button" style="display: none;">Câu tiếp theo</button>
+          </div>
+        </div>
+
+        <div id="quiz-result-panel" class="quiz-result"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- KaTeX JS & Auto-render (CDN jsDelivr) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <!-- Chart.js (CDN jsDelivr) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* =========================================================
+         BIẾN TRẠNG THÁI TOÀN CỤC (KHÔNG DÙNG LOCALSTORAGE)
+         ========================================================= */
+      let statsChartInstance = null;
+      let lastComputedStats = null;
+      let currentTheme = "light";
+
+      const SAMPLE_DATASET = [6.5, 7, 7.5, 8, 8, 8, 8.5, 9, 9.5, 2];
+
+      const SURVEY_DATASET = [
+        1.0, 1.0,
+        1.5, 1.5, 1.5, 1.5, 1.5,
+        2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0,
+        2.5, 2.5, 2.5, 2.5, 2.5, 2.5,
+        3.0, 3.0, 3.0, 3.0, 3.0,
+        3.5, 3.5,
+        4.5
+      ];
+
+      // 3 câu lý thuyết nền tảng (sẽ ghép thêm 3 câu tự sinh số liệu mới mỗi lượt)
+      const QUIZ_THEORY_BANK = [
+        {
+          question: "Mốt ($M_o$) của mẫu số liệu: $5, 6, 6, 7, 8, 8, 8, 9$ là:",
+          options: ["6", "7", "8", "Không có mốt"],
+          correctIndex: 2,
+          explanation: "Giá trị $8$ xuất hiện $3$ lần — nhiều nhất trong mẫu số liệu nên $M_o = 8$."
+        },
+        {
+          question: "Cho mẫu số liệu $2, 4, 6$ có số trung bình $\\bar{x} = 4$. Phương sai $s^2$ (theo SGK Toán 10) bằng:",
+          options: ["$\\frac{8}{3}$", "$4$", "$2$", "$\\frac{4}{3}$"],
+          correctIndex: 0,
+          explanation: "$s^2 = \\frac{(2-4)^2 + (4-4)^2 + (6-4)^2}{3} = \\frac{4 + 0 + 4}{3} = \\frac{8}{3}$."
+        },
+        {
+          question: "Một giá trị $x$ được gọi là giá trị ngoại lệ (bất thường) nếu thỏa mãn điều kiện nào sau đây?",
+          options: [
+            "$x < Q_1 - 1.5\\Delta_Q$ hoặc $x > Q_3 + 1.5\\Delta_Q$",
+            "$x < \\bar{x} - s$ hoặc $x > \\bar{x} + s$",
+            "$x < Q_1 - \\Delta_Q$ hoặc $x > Q_3 + \\Delta_Q$",
+            "$x < M_e - 2R$ hoặc $x > M_e + 2R$"
+          ],
+          correctIndex: 0,
+          explanation: "Theo quy tắc tứ phân vị trong SGK Toán 10, giá trị ngoại lệ nằm ngoài đoạn $[Q_1 - 1.5\\Delta_Q;\\, Q_3 + 1.5\\Delta_Q]$."
+        }
+      ];
+
+      let quizState = {
+        questions: [],
+        currentIndex: 0,
+        score: 0,
+        timeLeft: 180,
+        timerId: null,
+        answered: false,
+        playerName: "Học sinh"
+      };
+
+      /* =========================================================
+         HÀM TIỆN ÍCH AN TOÀN
+         ========================================================= */
+      function formatNumber(num) {
+        if (!Number.isFinite(num)) return "0";
+        const rounded = Math.round(num * 10000) / 10000;
+        return Object.is(rounded, -0) ? "0" : String(rounded);
+      }
+
+      function renderMathSafe(container) {
+        if (typeof renderMathInElement === "function" && container) {
+          try {
+            renderMathInElement(container, {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false }
+              ],
+              throwOnError: false
+            });
+          } catch (e) {
+            // Giữ nguyên văn bản nếu KaTeX gặp sự cố
+          }
+        }
+      }
+
+      /* =========================================================
+         CHUYỂN CHẾ ĐỘ SÁNG / TỐI (DARK MODE)
+         ========================================================= */
+      function toggleTheme() {
+        currentTheme = (currentTheme === "light") ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", currentTheme);
+
+        const btn = document.getElementById("btn-theme-toggle");
+        btn.textContent = (currentTheme === "dark") ? "☀️ Chế độ sáng" : "🌙 Chế độ tối";
+
+        // Vẽ lại biểu đồ để đồng bộ màu chữ & lưới theo chế độ tối/sáng
+        if (lastComputedStats !== null) {
+          const chartType = document.getElementById("select-chart-type").value;
+          renderFrequencyChart(lastComputedStats.sorted, chartType);
+        }
+      }
+
+      /* =========================================================
+         1. ĐIỀU HƯỚNG TAB: switchTab(tabName)
+         ========================================================= */
+      function switchTab(tabName) {
+        const tabs = ["home", "theory", "sandbox", "survey", "quiz"];
+        for (let i = 0; i < tabs.length; i++) {
+          const name = tabs[i];
+          const btn = document.getElementById("nav-tab-" + name);
+          const sec = document.getElementById("section-" + name);
+          if (btn && sec) {
+            if (name === tabName) {
+              btn.classList.add("active");
+              sec.classList.add("active");
+            } else {
+              btn.classList.remove("active");
+              sec.classList.remove("active");
+            }
+          }
+        }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      /* =========================================================
+         2. KIỂM TRA ĐẦU VÀO: parseAndValidateInput(rawText)
+         ========================================================= */
+      function parseAndValidateInput(rawText) {
+        if (typeof rawText !== "string" || rawText.trim() === "") {
+          return {
+            valid: false,
+            data: [],
+            error: "Vui lòng nhập ít nhất 2 số liệu (cách nhau bằng dấu phẩy hoặc khoảng trắng)."
+          };
+        }
+
+        const tokens = rawText.trim().split(/[\s,;]+/).filter(function (t) {
+          return t.length > 0;
+        });
+
+        if (tokens.length < 2) {
+          return {
+            valid: false,
+            data: [],
+            error: "Cần nhập ít nhất 2 số liệu để tính đầy đủ tứ phân vị, khoảng biến thiên và vẽ biểu đồ."
+          };
+        }
+
+        if (tokens.length > 500) {
+          return {
+            valid: false,
+            data: [],
+            error: "Vượt quá giới hạn 500 số liệu trong một lần phân tích để đảm bảo chạy mượt trên điện thoại."
+          };
+        }
+
+        const numberRegex = /^[+-]?(\d+(\.\d+)?|\.\d+)$/;
+        const parsedData = [];
+
+        for (let i = 0; i < tokens.length; i++) {
+          const token = tokens[i];
+          if (!numberRegex.test(token)) {
+            return {
+              valid: false,
+              data: [],
+              error: "Phát hiện giá trị không hợp lệ: \"" + token + "\". Chỉ nhập số thực (dùng dấu chấm cho số thập phân)."
+            };
+          }
+
+          const num = Number(token);
+          if (!Number.isFinite(num) || Math.abs(num) > 1e12) {
+            return {
+              valid: false,
+              data: [],
+              error: "Giá trị \"" + token + "\" vượt ngưỡng an toàn (tối đa 10^12)."
+            };
+          }
+          parsedData.push(num);
+        }
+
+        return { valid: true, data: parsedData, error: "" };
+      }
+
+      /* =========================================================
+         3. TÍNH TRUNG VỊ: computeMedian(sortedArr)
+         ========================================================= */
+      function computeMedian(sortedArr) {
+        const len = sortedArr.length;
+        if (len === 0) return 0;
+        const mid = Math.floor(len / 2);
+        if (len % 2 === 1) {
+          return sortedArr[mid];
+        }
+        return (sortedArr[mid - 1] + sortedArr[mid]) / 2;
+      }
+
+      /* =========================================================
+         4. TÍNH THỐNG KÊ TOÁN 10: computeStatistics(dataArr)
+         ========================================================= */
+      function computeStatistics(dataArr) {
+        const sorted = dataArr.slice().sort(function (a, b) {
+          return a - b;
+        });
+        const n = sorted.length;
+
+        let sum = 0;
+        for (let i = 0; i < n; i++) {
+          sum += sorted[i];
+        }
+        const mean = sum / n;
+
+        const median = computeMedian(sorted);
+        const mid = Math.floor(n / 2);
+        const lowerHalf = sorted.slice(0, mid);
+        const upperHalf = (n % 2 === 0) ? sorted.slice(mid) : sorted.slice(mid + 1);
+
+        const q1 = computeMedian(lowerHalf);
+        const q2 = median;
+        const q3 = computeMedian(upperHalf);
+        const iqr = q3 - q1;
+
+        const minVal = sorted[0];
+        const maxVal = sorted[n - 1];
+        const range = maxVal - minVal;
+
+        const freqMap = new Map();
+        let maxFreq = 0;
+        for (let i = 0; i < n; i++) {
+          const val = sorted[i];
+          const nextFreq = (freqMap.get(val) || 0) + 1;
+          freqMap.set(val, nextFreq);
+          if (nextFreq > maxFreq) {
+            maxFreq = nextFreq;
+          }
+        }
+
+        const modeValues = [];
+        freqMap.forEach(function (freq, val) {
+          if (freq === maxFreq) {
+            modeValues.push(val);
+          }
+        });
+
+        let modeText = "";
+        if (maxFreq === 1 || modeValues.length === freqMap.size) {
+          modeText = "Không có mốt";
+        } else {
+          modeText = modeValues.map(formatNumber).join(", ") + " (tần số " + maxFreq + ")";
+        }
+
+        let sumSqDiff = 0;
+        for (let i = 0; i < n; i++) {
+          const diff = sorted[i] - mean;
+          sumSqDiff += diff * diff;
+        }
+        const variance = sumSqDiff / n;
+        const std = Math.sqrt(variance);
+
+        const lowerFence = q1 - 1.5 * iqr;
+        const upperFence = q3 + 1.5 * iqr;
+        const outliers = [];
+        for (let i = 0; i < n; i++) {
+          if (sorted[i] < lowerFence || sorted[i] > upperFence) {
+            outliers.push(sorted[i]);
+          }
+        }
+
+        return {
+          sorted: sorted,
+          n: n,
+          sum: sum,
+          mean: mean,
+          median: median,
+          q1: q1,
+          q2: q2,
+          q3: q3,
+          iqr: iqr,
+          minVal: minVal,
+          maxVal: maxVal,
+          range: range,
+          modeText: modeText,
+          sumSqDiff: sumSqDiff,
+          variance: variance,
+          std: std,
+          lowerFence: lowerFence,
+          upperFence: upperFence,
+          outliers: outliers
+        };
+      }
+
+      /* =========================================================
+         5. HIỂN THỊ KẾT QUẢ: renderStatisticsUI(stats)
+         ========================================================= */
+      function renderStatisticsUI(stats) {
+        const wrapper = document.getElementById("sandbox-results-wrapper");
+        wrapper.style.display = "block";
+
+        document.getElementById("res-sorted-data").textContent = stats.sorted.map(formatNumber).join(" ; ");
+        document.getElementById("res-count").textContent = String(stats.n);
+        document.getElementById("res-mean").textContent = formatNumber(stats.mean);
+        document.getElementById("res-median").textContent = formatNumber(stats.median);
+        document.getElementById("res-mode").textContent = stats.modeText;
+        document.getElementById("res-range").textContent = formatNumber(stats.range);
+        document.getElementById("res-q1").textContent = formatNumber(stats.q1);
+        document.getElementById("res-q2").textContent = formatNumber(stats.q2);
+        document.getElementById("res-q3").textContent = formatNumber(stats.q3);
+        document.getElementById("res-iqr").textContent = formatNumber(stats.iqr);
+        document.getElementById("res-variance").textContent = formatNumber(stats.variance);
+        document.getElementById("res-std").textContent = formatNumber(stats.std);
+
+        const outlierBox = document.getElementById("res-outliers");
+        if (stats.outliers.length === 0) {
+          outlierBox.className = "outlier-box clean";
+          outlierBox.innerHTML =
+            "<strong>Kiểm tra ngoại lệ:</strong> Không phát hiện giá trị ngoại lệ nào ngoài đoạn $[" +
+            formatNumber(stats.lowerFence) + ";\\, " + formatNumber(stats.upperFence) + "]$.";
+        } else {
+          outlierBox.className = "outlier-box";
+          outlierBox.innerHTML =
+            "<strong>Cảnh báo giá trị ngoại lệ:</strong> Phát hiện <strong>" + stats.outliers.length +
+            "</strong> giá trị bất thường nằm ngoài đoạn $[" + formatNumber(stats.lowerFence) + ";\\, " +
+            formatNumber(stats.upperFence) + "]$: <strong>" +
+            stats.outliers.map(formatNumber).join(", ") + "</strong>.";
+        }
+
+        const stepsBox = document.getElementById("res-steps-math");
+        stepsBox.innerHTML =
+          "<p><strong>Bước 1 — Số trung bình:</strong> $$\\bar{x} = \\frac{" + formatNumber(stats.sum) + "}{" + stats.n + "} \\approx " + formatNumber(stats.mean) + "$$</p>" +
+          "<p><strong>Bước 2 — Khoảng biến thiên &amp; Tứ phân vị:</strong> $$R = " + formatNumber(stats.maxVal) + " - (" + formatNumber(stats.minVal) + ") = " + formatNumber(stats.range) + "$$</p>" +
+          "<p>$$Q_1 = " + formatNumber(stats.q1) + ", \\; Q_2 = " + formatNumber(stats.q2) + ", \\; Q_3 = " + formatNumber(stats.q3) + "$$</p>" +
+          "<p>$$\\Delta_Q = Q_3 - Q_1 = " + formatNumber(stats.q3) + " - " + formatNumber(stats.q1) + " = " + formatNumber(stats.iqr) + "$$</p>" +
+          "<p><strong>Bước 3 — Phương sai &amp; Độ lệch chuẩn (SGK Toán 10):</strong> $$s^2 = \\frac{" + formatNumber(stats.sumSqDiff) + "}{" + stats.n + "} \\approx " + formatNumber(stats.variance) + "$$</p>" +
+          "<p>$$s = \\sqrt{" + formatNumber(stats.variance) + "} \\approx " + formatNumber(stats.std) + "$$</p>";
+
+        renderMathSafe(outlierBox);
+        renderMathSafe(stepsBox);
+      }
+
+      /* =========================================================
+         6. VẼ BIỂU ĐỒ RGB + DARK MODE: renderFrequencyChart()
+         ========================================================= */
+      function renderFrequencyChart(sortedArr, chartType) {
+        const canvas = document.getElementById("stats-chart-canvas");
+        const fallbackMsg = document.getElementById("chart-fallback-msg");
+
+        if (statsChartInstance !== null) {
+          statsChartInstance.destroy();
+          statsChartInstance = null;
+        }
+
+        if (typeof Chart === "undefined") {
+          canvas.style.display = "none";
+          fallbackMsg.style.display = "block";
+          return;
+        }
+
+        canvas.style.display = "block";
+        fallbackMsg.style.display = "none";
+
+        const labels = [];
+        const counts = [];
+        for (let i = 0; i < sortedArr.length; i++) {
+          const labelStr = formatNumber(sortedArr[i]);
+          if (labels.length === 0 || labels[labels.length - 1] !== labelStr) {
+            labels.push(labelStr);
+            counts.push(1);
+          } else {
+            counts[counts.length - 1] += 1;
+          }
+        }
+
+        const isDark = (currentTheme === "dark");
+        const tickColor = isDark ? "#d1d5db" : "#374151";
+        const gridColor = isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(15, 23, 42, 0.08)";
+
+        // Bảng màu cột RGB đa sắc hài hòa
+        const rgbPalette = [
+          "rgba(66, 133, 244, 0.82)",
+          "rgba(139, 92, 246, 0.82)",
+          "rgba(236, 72, 153, 0.82)",
+          "rgba(6, 182, 212, 0.82)"
+        ];
+        const barColors = labels.map(function (_, idx) {
+          return rgbPalette[idx % rgbPalette.length];
+        });
+
+        const safeType = (chartType === "line") ? "line" : "bar";
+        const ctx = canvas.getContext("2d");
+
+        statsChartInstance = new Chart(ctx, {
+          type: safeType,
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Tần số xuất hiện",
+                data: counts,
+                backgroundColor: safeType === "bar" ? barColors : "rgba(139, 92, 246, 0.22)",
+                borderColor: safeType === "bar" ? barColors : "#8b5cf6",
+                borderWidth: 2,
+                borderRadius: safeType === "bar" ? 10 : 0,
+                tension: 0.3,
+                fill: safeType === "line",
+                pointBackgroundColor: "#ec4899",
+                pointRadius: 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: true,
+                position: "top",
+                labels: { color: tickColor }
+              }
+            },
+            scales: {
+              x: {
+                ticks: { color: tickColor },
+                grid: { color: gridColor },
+                title: { display: true, text: "Giá trị (x)", color: tickColor }
+              },
+              y: {
+                beginAtZero: true,
+                ticks: { precision: 0, color: tickColor },
+                grid: { color: gridColor },
+                title: { display: true, text: "Tần số (n)", color: tickColor }
+              }
+            }
+          }
+        });
+      }
+
+      /* =========================================================
+         7. ĐIỀU PHỐI TÍNH TOÁN & NẠP MẪU
+         ========================================================= */
+      function handleCalculate() {
+        const inputEl = document.getElementById("input-data-series");
+        const errorBox = document.getElementById("sandbox-error-msg");
+        const resultsWrapper = document.getElementById("sandbox-results-wrapper");
+        const chartSelect = document.getElementById("select-chart-type");
+
+        const validation = parseAndValidateInput(inputEl.value);
+
+        if (!validation.valid) {
+          resultsWrapper.style.display = "none";
+          errorBox.textContent = validation.error;
+          errorBox.style.display = "block";
+          lastComputedStats = null;
+          return;
+        }
+
+        errorBox.style.display = "none";
+        errorBox.textContent = "";
+
+        const stats = computeStatistics(validation.data);
+        lastComputedStats = stats;
+
+        renderStatisticsUI(stats);
+        renderFrequencyChart(stats.sorted, chartSelect.value);
+      }
+
+      function loadSampleData(datasetArray) {
+        document.getElementById("input-data-series").value = datasetArray.join(", ");
+        switchTab("sandbox");
+        handleCalculate();
+      }
+
+      /* =========================================================
+         8. BỘ TỰ SINH CÂU HỎI ĐỘNG & QUẢN LÝ QUIZ
+         ========================================================= */
+      function createDynamicQuestion(type) {
+        const size = Math.random() < 0.5 ? 6 : 7;
+        const arr = [];
+        for (let i = 0; i < size; i++) {
+          arr.push(Math.floor(Math.random() * 14) + 2);
+        }
+
+        const stats = computeStatistics(arr);
+        const rawStr = arr.join(", ");
+        const sortedStr = stats.sorted.join(", ");
+
+        let question = "";
+        let correctVal = 0;
+        let explanation = "";
+
+        if (type === "mean") {
+          question = "Cho mẫu số liệu: $" + rawStr + "$. Số trung bình cộng $\\bar{x}$ là:";
+          correctVal = stats.mean;
+          explanation = "Ta có $\\bar{x} = \\frac{" + stats.sum + "}{" + stats.n + "} \\approx " + formatNumber(stats.mean) + "$.";
+        } else if (type === "median") {
+          question = "Tìm trung vị $M_e$ của mẫu số liệu: $" + rawStr + "$.";
+          correctVal = stats.median;
+          explanation = "Sắp xếp không giảm: $" + sortedStr + "$. Trung vị là $M_e = " + formatNumber(stats.median) + "$.";
+        } else {
+          question = "Tính khoảng tứ phân vị $\\Delta_Q = Q_3 - Q_1$ của mẫu: $" + rawStr + "$.";
+          correctVal = stats.iqr;
+          explanation = "Sắp xếp: $" + sortedStr + "$. Ta có $Q_1 = " + formatNumber(stats.q1) + "$, $Q_3 = " + formatNumber(stats.q3) + " \\Rightarrow \\Delta_Q = " + formatNumber(stats.iqr) + "$.";
+        }
+
+        const correctStr = formatNumber(correctVal);
+        const optionSet = new Set([correctStr]);
+        const offsets = [-2, -1.5, -1, -0.5, 0.5, 1, 1.5, 2, 3];
+
+        while (optionSet.size < 4) {
+          const pick = offsets[Math.floor(Math.random() * offsets.length)];
+          const fakeVal = Math.max(0, correctVal + pick);
+          optionSet.add(formatNumber(fakeVal));
+        }
+
+        const options = Array.from(optionSet);
+        for (let i = options.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const tmp = options[i];
+          options[i] = options[j];
+          options[j] = tmp;
+        }
+
+        return {
+          question: question,
+          options: options,
+          correctIndex: options.indexOf(correctStr),
+          explanation: explanation
+        };
+      }
+
+      function updateTimerDisplay() {
+        const mins = Math.floor(quizState.timeLeft / 60);
+        const secs = quizState.timeLeft % 60;
+        const mStr = mins < 10 ? "0" + mins : String(mins);
+        const sStr = secs < 10 ? "0" + secs : String(secs);
+        document.getElementById("quiz-timer").textContent = mStr + ":" + sStr;
+      }
+
+      function initQuiz() {
+        if (quizState.timerId !== null) {
+          clearInterval(quizState.timerId);
+          quizState.timerId = null;
+        }
+
+        const nameInput = document.getElementById("input-player-name").value.trim();
+        quizState.playerName = nameInput !== "" ? nameInput : "Bạn học sinh";
+
+        const dynamicList = [
+          createDynamicQuestion("mean"),
+          createDynamicQuestion("median"),
+          createDynamicQuestion("iqr")
+        ];
+        const shuffled = QUIZ_THEORY_BANK.slice().concat(dynamicList);
+
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const temp = shuffled[i];
+          shuffled[i] = shuffled[j];
+          shuffled[j] = temp;
+        }
+
+        quizState.questions = shuffled;
+        quizState.currentIndex = 0;
+        quizState.score = 0;
+        quizState.timeLeft = 180;
+        quizState.answered = false;
+
+        document.getElementById("quiz-result-panel").style.display = "none";
+        document.getElementById("quiz-play-area").style.display = "block";
+
+        updateTimerDisplay();
+        quizState.timerId = setInterval(function () {
+          quizState.timeLeft -= 1;
+          updateTimerDisplay();
+          if (quizState.timeLeft <= 0) {
+            finishQuiz();
+          }
+        }, 1000);
+
+        renderQuizQuestion(0);
+      }
+
+      function renderQuizQuestion(index) {
+        const qObj = quizState.questions[index];
+        quizState.answered = false;
+
+        document.getElementById("quiz-progress").textContent =
+          "Câu " + (index + 1) + " / " + quizState.questions.length;
+
+        const qBox = document.getElementById("quiz-question-box");
+        qBox.innerHTML = qObj.question;
+
+        const optionsContainer = document.getElementById("quiz-options-container");
+        optionsContainer.innerHTML = "";
+
+        const letters = ["A", "B", "C", "D"];
+        for (let i = 0; i < qObj.options.length; i++) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "quiz-opt-btn";
+          btn.innerHTML = "<strong>" + letters[i] + ".</strong> " + qObj.options[i];
+          (function (choiceIndex) {
+            btn.addEventListener("click", function () {
+              handleAnswerSelect(choiceIndex);
+            });
+          })(i);
+          optionsContainer.appendChild(btn);
+        }
+
+        const expBox = document.getElementById("quiz-explanation-box");
+        expBox.style.display = "none";
+        expBox.innerHTML = "";
+
+        const nextBtn = document.getElementById("btn-quiz-next");
+        nextBtn.style.display = "none";
+        nextBtn.textContent = (index === quizState.questions.length - 1) ? "Xem kết quả" : "Câu tiếp theo";
+
+        renderMathSafe(qBox);
+        renderMathSafe(optionsContainer);
+      }
+
+      function handleAnswerSelect(selectedIndex) {
+        if (quizState.answered) return;
+        quizState.answered = true;
+
+        const qObj = quizState.questions[quizState.currentIndex];
+        const buttons = document.getElementById("quiz-options-container").querySelectorAll("button");
+
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].disabled = true;
+          if (i === qObj.correctIndex) {
+            buttons[i].classList.add("correct");
+          } else if (i === selectedIndex) {
+            buttons[i].classList.add("wrong");
+          }
+        }
+
+        const expBox = document.getElementById("quiz-explanation-box");
+        if (selectedIndex === qObj.correctIndex) {
+          quizState.score += 1;
+          expBox.innerHTML = "<strong>Chính xác!</strong> " + qObj.explanation;
+        } else {
+          expBox.innerHTML = "<strong>Chưa đúng!</strong> " + qObj.explanation;
+        }
+        expBox.style.display = "block";
+        renderMathSafe(expBox);
+
+        document.getElementById("btn-quiz-next").style.display = "inline-flex";
+      }
+
+      function finishQuiz() {
+        if (quizState.timerId !== null) {
+          clearInterval(quizState.timerId);
+          quizState.timerId = null;
+        }
+
+        document.getElementById("quiz-play-area").style.display = "none";
+
+        const total = quizState.questions.length;
+        const score = quizState.score;
+        const percent = Math.round((score / total) * 100);
+
+        let badge = "Cần ôn tập thêm";
+        if (percent >= 85) {
+          badge = "Bậc Thầy Thống Kê";
+        } else if (percent >= 65) {
+          badge = "Nhà Phân Tích Dữ Liệu";
+        } else if (percent >= 50) {
+          badge = "Đạt Yêu Cầu";
+        }
+
+        const safeName = quizState.playerName.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        const resultPanel = document.getElementById("quiz-result-panel");
+        resultPanel.innerHTML =
+          "<h3>Chúc mừng " + safeName + "!</h3>" +
+          "<div class=\"badge-rank\">" + badge + "</div>" +
+          "<p style=\"font-size: 1.05rem; margin: 8px 0;\">Điểm số của bạn: <strong>" + score + " / " + total + "</strong> (" + percent + "%)</p>" +
+          "<p class=\"subtitle\">Nhấn nút <strong>Bắt đầu / Đề mới</strong> để thử sức với bộ số liệu hoàn toàn mới.</p>";
+        resultPanel.style.display = "block";
+      }
+
+      /* =========================================================
+         GẮN SỰ KIỆN KHI TRANG TẢI XONG
+         ========================================================= */
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("btn-theme-toggle").addEventListener("click", toggleTheme);
+
+        document.getElementById("nav-tab-home").addEventListener("click", function () { switchTab("home"); });
+        document.getElementById("nav-tab-theory").addEventListener("click", function () { switchTab("theory"); });
+        document.getElementById("nav-tab-sandbox").addEventListener("click", function () { switchTab("sandbox"); });
+        document.getElementById("nav-tab-survey").addEventListener("click", function () { switchTab("survey"); });
+        document.getElementById("nav-tab-quiz").addEventListener("click", function () { switchTab("quiz"); });
+
+        document.getElementById("btn-start-sandbox").addEventListener("click", function () { switchTab("sandbox"); });
+        document.getElementById("btn-start-quiz").addEventListener("click", function () { switchTab("quiz"); });
+
+        document.getElementById("btn-toggle-casio").addEventListener("click", function () {
+          const panel = document.getElementById("casio-guide-panel");
+          const isOpen = panel.classList.toggle("open");
+          this.textContent = isOpen
+            ? "Ẩn hướng dẫn bấm máy Casio fx-580VN X"
+            : "Xem hướng dẫn bấm máy Casio fx-580VN X";
+          if (isOpen) {
+            renderMathSafe(panel);
+          }
+        });
+
+        document.getElementById("btn-calculate").addEventListener("click", handleCalculate);
+
+        document.getElementById("btn-load-sample").addEventListener("click", function () {
+          loadSampleData(SAMPLE_DATASET);
+        });
+
+        document.getElementById("btn-clear-data").addEventListener("click", function () {
+          document.getElementById("input-data-series").value = "";
+          document.getElementById("sandbox-error-msg").style.display = "none";
+          document.getElementById("sandbox-results-wrapper").style.display = "none";
+          lastComputedStats = null;
+          if (statsChartInstance !== null) {
+            statsChartInstance.destroy();
+            statsChartInstance = null;
+          }
+        });
+
+        document.getElementById("select-chart-type").addEventListener("change", function () {
+          if (lastComputedStats !== null) {
+            renderFrequencyChart(lastComputedStats.sorted, this.value);
+          }
+        });
+
+        document.getElementById("btn-push-survey-to-sandbox").addEventListener("click", function () {
+          loadSampleData(SURVEY_DATASET);
+        });
+
+        document.getElementById("btn-quiz-start").addEventListener("click", initQuiz);
+        document.getElementById("btn-quiz-next").addEventListener("click", function () {
+          if (quizState.currentIndex + 1 < quizState.questions.length) {
+            quizState.currentIndex += 1;
+            renderQuizQuestion(quizState.currentIndex);
+          } else {
+            finishQuiz();
+          }
+        });
+      });
+      /* =========================================================
+         TƯƠNG TÁC VUỐT NGANG CHUYỂN TAB (MOBILE SWIPE)
+         ========================================================= */
+      (function setupSwipeNavigation() {
+        const tabOrder = ["home", "theory", "sandbox", "survey", "quiz"];
+        let startX = 0;
+        let startY = 0;
+        let ignoreSwipe = false;
+
+        document.addEventListener("touchstart", function (e) {
+          if (e.touches.length !== 1) return;
+          // Bỏ qua nếu chạm vào vùng cần vuốt ngang riêng hoặc ô nhập liệu
+          const target = e.target;
+          if (target.closest(".nav-bar, .table-wrap, .katex-display, .steps-box, textarea, input, select, canvas")) {
+            ignoreSwipe = true;
+            return;
+          }
+          ignoreSwipe = false;
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener("touchend", function (e) {
+          if (ignoreSwipe || e.changedTouches.length !== 1) return;
+          const dx = e.changedTouches[0].clientX - startX;
+          const dy = e.changedTouches[0].clientY - startY;
+
+          // Chỉ chuyển tab khi vuốt ngang rõ (> 65px) và ít lệch dọc
+          if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+            let currentIndex = 0;
+            for (let i = 0; i < tabOrder.length; i++) {
+              const sec = document.getElementById("section-" + tabOrder[i]);
+              if (sec && sec.classList.contains("active")) {
+                currentIndex = i;
+                break;
+              }
+            }
+
+            let nextIndex = currentIndex;
+            if (dx < 0 && currentIndex < tabOrder.length - 1) {
+              nextIndex = currentIndex + 1; // Vuốt sang trái -> Tab kế tiếp
+            } else if (dx > 0 && currentIndex > 0) {
+              nextIndex = currentIndex - 1; // Vuốt sang phải -> Tab trước đó
+            }
+
+            if (nextIndex !== currentIndex) {
+              const nextTab = tabOrder[nextIndex];
+              switchTab(nextTab);
+              const activeBtn = document.getElementById("nav-tab-" + nextTab);
+              if (activeBtn && typeof activeBtn.scrollIntoView === "function") {
+                activeBtn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+              }
+            }
+          }
+        }, { passive: true });
+      })();
+
+      window.addEventListener("load", function () {
+        renderMathSafe(document.body);
+      });
+    })();
+  </script>
+</body>
+</html>
